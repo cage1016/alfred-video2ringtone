@@ -6,7 +6,7 @@ package main
 import (
 	_ "github.com/joho/godotenv/autoload"
 
-	"github.com/cage1016/alfred-yt-ringtone/cmd"
+	"github.com/cage1016/alfred-yt2ringtone/cmd"
 )
 
 func main() {
