@@ -8,7 +8,6 @@ import (
 	"bufio"
 	"fmt"
 	"io"
-	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -16,6 +15,7 @@ import (
 	"time"
 
 	"github.com/cage1016/alfred-yt2ringtone/alfred"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
 
@@ -75,7 +75,7 @@ func runConvertCmd(ccmd *cobra.Command, args []string) {
 	var targetName string
 	{
 		flags := []string{
-			"-f", "22", url,
+			url,
 			"--external-downloader", "ffmpeg",
 			"--external-downloader-args", fmt.Sprintf("ffmpeg_i:-ss %s -t %s", ss, t),
 			"-x", "--audio-format", "m4a",
@@ -84,33 +84,53 @@ func runConvertCmd(ccmd *cobra.Command, args []string) {
 			"--output", filepath.Join(wf.DataDir(), "%(title)s_tmp.%(ext)s"),
 		}
 
-		cmd := exec.Command("yt-dlp", append([]string{"--get-filename"}, flags...)...)
-		out, err := cmd.CombinedOutput()
-		if err != nil {
-			wf.FatalError(err)
+		// get file name
+		{
+			cmd := exec.Command("yt-dlp", append([]string{"--get-filename"}, flags...)...)
+			logrus.Debugf("yt-dlp get-filename: %s", cmd)
+			out, _ := cmd.CombinedOutput()
+			logrus.Debugf("yt-dlp get-filename output: %s", out)
+			if strings.HasPrefix(string(out), "ERROR") {
+				notifier("YouTube 2 Ringtone", string(out))
+				alfred.StoreOngoingProcess(wf, alfred.Process{}) // reset process.json
+				logrus.Fatalf("yt-dlp error: %s", string(out))
+			}
+			targetName = fileNameWithoutExtTrimSuffix(filepath.Base(strings.Split(string(out), "\n")[0]))
 		}
-		targetName = fileNameWithoutExtTrimSuffix(filepath.Base(strings.Split(string(out), "\n")[0]))
 
-		cmd = exec.Command("yt-dlp", append([]string{"--newline"}, flags...)...)
-		r, _ := cmd.StdoutPipe()
-		cmd.Stderr = cmd.Stdout
+		// download
+		{
+			cmd := exec.Command("yt-dlp", append([]string{"--newline", "-f", "22"}, flags...)...)
+			logrus.Debugf("yt-dlp download: %s", cmd)
+			r, _ := cmd.StdoutPipe()
+			cmd.Stderr = cmd.Stdout
 
-		done := make(chan struct{})
-		worker(done, r, func(line string) {
+			done := make(chan struct{})
+			worker(done, r, func(line string) {
+				logrus.Debug(line)
+				data, _ := alfred.LoadOngoingProcess(wf)
+				data.Process = line
+				data.Step = "downloading"
+				alfred.StoreOngoingProcess(wf, data)
+			})
+
+			cmd.Start()
+			<-done
+			cmd.Wait()
+
+			// check if download success
 			data, _ := alfred.LoadOngoingProcess(wf)
-			data.Process = line
-			data.Step = "downloading"
-			alfred.StoreOngoingProcess(wf, data)
-		})
-
-		cmd.Start()
-		<-done
-		cmd.Wait()
+			if strings.HasPrefix(data.Process, "ERROR") {
+				notifier("YouTube 2 Ringtone", data.Process)
+				alfred.StoreOngoingProcess(wf, alfred.Process{}) // reset process.json
+				logrus.Fatalf("yt-dlp error: %s", data.Process)
+			}
+		}
 	}
 
 	DestName := strings.TrimSuffix(targetName, "_tmp")
 	{
-		// ffmpeg convert mp3 to ogg
+		// ffmpeg apply fadeIn fadeOut
 		flags := []string{
 			"-y",
 			"-i", filepath.Join(wf.DataDir(), targetName+".m4a"),
@@ -118,12 +138,13 @@ func runConvertCmd(ccmd *cobra.Command, args []string) {
 			filepath.Join(wf.DataDir(), DestName+".m4a"),
 		}
 		cmd := exec.Command("ffmpeg", flags...)
-		log.Println(cmd)
+		logrus.Debugf("ffmpeg apply fadeIn fadeOut cmd: %s", cmd)
 		r, _ := cmd.StdoutPipe()
 		cmd.Stderr = cmd.Stdout
 
 		done := make(chan struct{})
 		worker(done, r, func(line string) {
+			logrus.Debug(line)
 			if strings.HasPrefix(line, "size=") {
 				data, _ := alfred.LoadOngoingProcess(wf)
 				data.Process = strings.TrimSpace(lastItem(strings.Split(line, "\r")))

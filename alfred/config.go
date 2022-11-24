@@ -11,6 +11,7 @@ const (
 	Duration = "DURATION"
 	FadeIn   = "FADEIN"
 	FadeOut  = "FADEOUT"
+	Debug    = "DEBUG"
 )
 
 const helpTpl = `# HH:MM:SS
@@ -42,6 +43,10 @@ func GetFadein(wf *aw.Workflow) string {
 
 func GetFadeout(wf *aw.Workflow) string {
 	return wf.Config.Get(FadeOut)
+}
+
+func GetDebug(wf *aw.Workflow) bool {
+	return wf.Config.GetBool(Debug)
 }
 
 var Create = func(name, t string) *template.Template {

@@ -6,15 +6,16 @@ package cmd
 
 import (
 	"errors"
-	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
 
-	"github.com/cage1016/alfred-yt2ringtone/alfred"
 	aw "github.com/deanishe/awgo"
 	"github.com/deanishe/awgo/update"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+
+	"github.com/cage1016/alfred-yt2ringtone/alfred"
 )
 
 const updateJobName = "checkForUpdate"
@@ -34,10 +35,10 @@ func ErrorHandle(err error) {
 
 func CheckForUpdate() {
 	if wf.UpdateCheckDue() && !wf.IsRunning(updateJobName) {
-		log.Println("Running update check in background...")
+		logrus.Info("Running update check in background...")
 		cmd := exec.Command(os.Args[0], "update")
 		if err := wf.RunInBackground(updateJobName, cmd); err != nil {
-			log.Printf("Error starting update check: %s", err)
+			logrus.Errorf("Error starting update check: %s", err)
 		}
 	}
 
@@ -65,7 +66,6 @@ var rootCmd = &cobra.Command{
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	wf.Run(func() {
-
 		if _, err := os.Stat(filepath.Join(wf.DataDir(), "process.json")); errors.Is(err, os.ErrNotExist) {
 			alfred.StoreOngoingProcess(wf, alfred.Process{})
 		}
@@ -75,8 +75,7 @@ func Execute() {
 		}
 
 		if err := rootCmd.Execute(); err != nil {
-			log.Println(err)
-			os.Exit(1)
+			logrus.Fatal(err)
 		}
 	})
 }
@@ -84,4 +83,10 @@ func Execute() {
 func init() {
 	wf = aw.New(update.GitHub(repo), aw.HelpURL(repo+"/issues"))
 	wf.Args() // magic for "workflow:update"
+
+	if alfred.GetDebug(wf) {
+		logrus.SetLevel(logrus.DebugLevel)
+	} else {
+		logrus.SetLevel(logrus.InfoLevel)
+	}
 }

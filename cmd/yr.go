@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/atotto/clipboard"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
 	"github.com/cage1016/alfred-yt2ringtone/alfred"
@@ -45,6 +46,8 @@ func runYrCmd(cmd *cobra.Command, args []string) {
 	// 1. Universal Action
 	// 2. Youtube Page
 	// 3. Clipboard
+
+	logrus.Debugf("args[0]: %v", args[0])
 	if args[0] != "" {
 		// 1. Universal Action
 		url := args[0]
@@ -119,6 +122,7 @@ func runYrCmd(cmd *cobra.Command, args []string) {
 
 		ccmd := exec.Command("osascript", scripts.Path("get_title_and_url.js"))
 		out, err := ccmd.CombinedOutput()
+		logrus.Debugf("out: %v", string(out))
 		if err != nil {
 			// 3. Clipboard
 			// NOT browser as frontmost app
