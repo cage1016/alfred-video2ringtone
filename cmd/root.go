@@ -1,13 +1,11 @@
 /*
 Copyright © 2022 KAI CHU CHUNG <cage.chung@gmail.com>
-
 */
 package cmd
 
 import (
 	"errors"
 	"os"
-	"os/exec"
 	"path/filepath"
 
 	aw "github.com/deanishe/awgo"
@@ -33,31 +31,11 @@ func ErrorHandle(err error) {
 	}
 }
 
-func CheckForUpdate() {
-	if wf.UpdateCheckDue() && !wf.IsRunning(updateJobName) {
-		logrus.Info("Running update check in background...")
-		cmd := exec.Command(os.Args[0], "update")
-		if err := wf.RunInBackground(updateJobName, cmd); err != nil {
-			logrus.Errorf("Error starting update check: %s", err)
-		}
-	}
-
-	if wf.UpdateAvailable() {
-		wf.Configure(aw.SuppressUIDs(true))
-		wf.NewItem("An update is available!").
-			Subtitle("⇥ or ↩ to install update").
-			Valid(false).
-			Autocomplete("workflow:update").
-			Icon(&aw.Icon{Value: "update-available.png"})
-	}
-}
-
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "Ringtone Maker via Youtube",
 	Short: "Create ringtone from youtube video",
 	Run: func(cmd *cobra.Command, args []string) {
-		CheckForUpdate()
 		wf.SendFeedback()
 	},
 }

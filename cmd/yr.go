@@ -1,6 +1,5 @@
 /*
 Copyright © 2022 KAI CHU CHUNG <cage.chung@gmail.com>
-
 */
 package cmd
 
@@ -27,8 +26,6 @@ var yrCmd = &cobra.Command{
 }
 
 func runYrCmd(cmd *cobra.Command, args []string) {
-	CheckForUpdate()
-
 	// check previous job
 	p, _ := alfred.LoadOngoingProcess(wf)
 	if p.Step != "" {

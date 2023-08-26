@@ -1,6 +1,5 @@
 /*
 Copyright © 2022 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
@@ -23,8 +22,6 @@ var ylCmd = &cobra.Command{
 }
 
 func runYlCmd(c *cobra.Command, args []string) {
-	CheckForUpdate()
-
 	data, _ := alfred.LoadOngoingRingTone(wf)
 	for url, rt := range data.Item {
 		p := filepath.Join(wf.DataDir(), rt.Name)

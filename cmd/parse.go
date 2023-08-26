@@ -1,6 +1,5 @@
 /*
 Copyright © 2022 KAI CHU CHUNG <cage.chung@gmail.com>
-
 */
 package cmd
 
@@ -36,8 +35,6 @@ var parseCmd = &cobra.Command{
 var count = 0
 
 func runParseCmd(cmd *cobra.Command, args []string) {
-	CheckForUpdate()
-
 	p, _ := alfred.LoadOngoingProcess(wf)
 	if p.Step != "" {
 		wf.NewItem(p.Title).
