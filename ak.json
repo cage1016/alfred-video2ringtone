@@ -6,7 +6,7 @@
         "description": "Convert youtube video to ringtone",
         "category_comment": "category: Tools, Internet, Productivity, Uncategorised",
         "category": "Tools",
-        "bundle_id": "com.kaichu.yt2ringtone",
+        "bundle_id": "com.kaichu.video2ringtone",
         "created_by": "KAI CHU CHUNG",
         "web_address": "https://github.com/cage1016/alfred-video2ringtone",
         "version": "0.1.0"
@@ -17,7 +17,7 @@
     "license": {
         "type_comment": "support license https://github.com/nishanths/license",
         "type": "mit",
-        "year": "2022",
+        "year": "2023",
         "name": "KAI CHU CHUNG"
     },
     "gon": {
