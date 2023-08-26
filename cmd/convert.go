@@ -100,7 +100,7 @@ func runConvertCmd(ccmd *cobra.Command, args []string) {
 
 		// download
 		{
-			cmd := exec.Command("yt-dlp", append([]string{"--newline", "-f", "22"}, flags...)...)
+			cmd := exec.Command("yt-dlp", append([]string{"--newline", "-f", "bestaudio[ext=m4a]"}, flags...)...)
 			logrus.Debugf("yt-dlp download: %s", cmd)
 			r, _ := cmd.StdoutPipe()
 			cmd.Stderr = cmd.Stdout
