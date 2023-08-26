@@ -1,4 +1,4 @@
-module github.com/cage1016/alfred-yt2ringtone
+module github.com/cage1016/alfred-video2ringtone
 
 go 1.18
 

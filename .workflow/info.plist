@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>com.kaichu.yt2ringtone</string>
+	<string>com.kaichu.video2ringtone</string>
 	<key>category</key>
 	<string>Tools</string>
 	<key>connections</key>
@@ -218,11 +218,11 @@
 	<key>createdby</key>
 	<string>KAI CHU CHUNG</string>
 	<key>description</key>
-	<string>Convert youtube video to ringtone</string>
+	<string>Convert video to ringtone</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Youtube 2 Ringtone</string>
+	<string>Video 2 Ringtone</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -857,6 +857,6 @@
 	<key>version</key>
 	<string>0.1.0</string>
 	<key>webaddress</key>
-	<string>https://github.com/cage1016/alfred-yt2ringtone</string>
+	<string>https://github.com/cage1016/alfred-video2ringtone</string>
 </dict>
 </plist>

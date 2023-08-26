@@ -11,7 +11,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/cage1016/alfred-yt2ringtone/alfred"
+	"github.com/cage1016/alfred-video2ringtone/alfred"
 )
 
 var rangeRegex = regexp.MustCompile(`(?m)^[0-2][0-3]:[0-5][0-9]:[0-5][0-9](?:,(40|[0-3][0-9]|[12][0-9]|[1-9]))?(?:,(40|[0-3][0-9]|[12][0-9]|[1-9])){0,2}$`)

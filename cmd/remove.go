@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/cage1016/alfred-yt2ringtone/alfred"
+	"github.com/cage1016/alfred-video2ringtone/alfred"
 	"github.com/spf13/cobra"
 )
 
