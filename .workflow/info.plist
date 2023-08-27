@@ -12,50 +12,11 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>61338289-2042-4FE8-BB39-594CC313C789</string>
+				<string>833965A8-50B4-45A9-B98F-64FFE6B40E72</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>08B50D41-CDA9-4549-9BE4-391F2F398D8A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4DE1E041-ECE8-43DE-8979-03806E84777E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>D146AFCD-BC1C-4DDF-8791-680B5D9D21D5</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>6F5CB455-2F0E-4069-B0ED-7E6387CA5FAE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>9E73EAF6-59EF-458A-9CEB-43CD6F935180</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>C14EE479-8A76-4654-82AE-E5CB93857AC5</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>D8F73CD1-766B-4916-9BC8-A8096CB107E0</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -64,7 +25,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>C5D01C04-489D-4334-B3EF-241ACA937B37</string>
+				<string>03BCD0DF-C2C2-4D7C-8881-AB5F12B61277</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -73,11 +34,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>4DE1E041-ECE8-43DE-8979-03806E84777E</key>
+		<key>469D80C9-6508-480E-8992-DF530C8CA046</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>03BCD0DF-C2C2-4D7C-8881-AB5F12B61277</string>
+				<string>8909A4F3-EBBA-4C3F-A855-177DEC0763FD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -100,7 +61,18 @@
 			</dict>
 		</array>
 		<key>61338289-2042-4FE8-BB39-594CC313C789</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7F3D03A2-D286-4A49-8A2E-774324A67691</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>6F5CB455-2F0E-4069-B0ED-7E6387CA5FAE</key>
 		<array>
 			<dict>
@@ -118,7 +90,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>3EA52F77-CF6A-4F12-BCAC-024B03C90FCF</string>
+				<string>6F5CB455-2F0E-4069-B0ED-7E6387CA5FAE</string>
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
@@ -128,7 +100,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>6F5CB455-2F0E-4069-B0ED-7E6387CA5FAE</string>
+				<string>3EA52F77-CF6A-4F12-BCAC-024B03C90FCF</string>
 				<key>modifiers</key>
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
@@ -139,6 +111,58 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>C14EE479-8A76-4654-82AE-E5CB93857AC5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>833965A8-50B4-45A9-B98F-64FFE6B40E72</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>61338289-2042-4FE8-BB39-594CC313C789</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>55D6BFA5-8C4A-411E-A5F4-1A3CDB5B1E2B</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6F5CB455-2F0E-4069-B0ED-7E6387CA5FAE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>2AD1AF87-8F91-464A-A52C-04A9D83D5885</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>C14EE479-8A76-4654-82AE-E5CB93857AC5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>48278E84-9280-48E1-B62D-959C7EAFBCD2</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>8909A4F3-EBBA-4C3F-A855-177DEC0763FD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>03BCD0DF-C2C2-4D7C-8881-AB5F12B61277</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -166,7 +190,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>08B50D41-CDA9-4549-9BE4-391F2F398D8A</string>
+				<string>3EA52F77-CF6A-4F12-BCAC-024B03C90FCF</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -228,21 +252,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>notifier</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>D444A531-2963-4383-80F4-FF0F5D83F476</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -258,6 +267,21 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>349B90A8-36CF-42B7-83FF-6F6FF6E10786</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>notifier</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>D444A531-2963-4383-80F4-FF0F5D83F476</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -303,6 +327,192 @@
 			<string>DE6C57FC-05DE-43C9-B80C-2CD77EE2541B</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>detect</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>469D80C9-6508-480E-8992-DF530C8CA046</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>00:00:00,{var:DURATION},{var:FADEIN},{var:FADEOUT}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>8909A4F3-EBBA-4C3F-A855-177DEC0763FD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<false/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Convert video 2 ringtone</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>5C0BDE92-B2B0-43CC-89B6-20A0C1AEA13B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>detect</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>7F3D03A2-D286-4A49-8A2E-774324A67691</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>./exe convert -i "${input}" -- $1</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>61338289-2042-4FE8-BB39-594CC313C789</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>./exe remove "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>6F5CB455-2F0E-4069-B0ED-7E6387CA5FAE</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>list</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>F252ADEA-5571-45A2-8321-A68A3565C51A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:KEYWOARD_DETECT}</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>loading...</string>
+				<key>script</key>
+				<string>./exe detect</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Detet Video and Convert 2 Ringtone</string>
+				<key>title</key>
+				<string>Detet Video and Convert 2 Ringtone</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>C5D01C04-489D-4334-B3EF-241ACA937B37</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -354,119 +564,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>./exe convert $1 -i "${input}"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>61338289-2042-4FE8-BB39-594CC313C789</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>00:00:00,{var:DURATION},{var:FADEIN},{var:FADEOUT}</string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>input</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>4DE1E041-ECE8-43DE-8979-03806E84777E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<false/>
-				<key>acceptsurls</key>
-				<true/>
-				<key>name</key>
-				<string>Convert youtube 2 ringtone</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>5C0BDE92-B2B0-43CC-89B6-20A0C1AEA13B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>yr</string>
-				<key>queuedelaycustom</key>
-				<integer>1</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>loading...</string>
-				<key>script</key>
-				<string>./exe yr "${input}"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string>Convert Youtubre 2 Ringtone</string>
-				<key>title</key>
-				<string>Youtube 2 Ringtone</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>C5D01C04-489D-4334-B3EF-241ACA937B37</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -477,11 +574,11 @@
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
-						<string>parse</string>
+						<string>convert</string>
 						<key>outputlabel</key>
-						<string>parse</string>
+						<string>Convert</string>
 						<key>uid</key>
-						<string>D146AFCD-BC1C-4DDF-8791-680B5D9D21D5</string>
+						<string>55D6BFA5-8C4A-411E-A5F4-1A3CDB5B1E2B</string>
 					</dict>
 					<dict>
 						<key>inputstring</key>
@@ -493,9 +590,9 @@
 						<key>matchstring</key>
 						<string>remove</string>
 						<key>outputlabel</key>
-						<string>remove</string>
+						<string>Remove Item</string>
 						<key>uid</key>
-						<string>9E73EAF6-59EF-458A-9CEB-43CD6F935180</string>
+						<string>2AD1AF87-8F91-464A-A52C-04A9D83D5885</string>
 					</dict>
 					<dict>
 						<key>inputstring</key>
@@ -505,11 +602,11 @@
 						<key>matchmode</key>
 						<integer>0</integer>
 						<key>matchstring</key>
-						<string>reveal</string>
+						<string>alfred-action</string>
 						<key>outputlabel</key>
-						<string>reveal</string>
+						<string>Action in Alfred</string>
 						<key>uid</key>
-						<string>D8F73CD1-766B-4916-9BC8-A8096CB107E0</string>
+						<string>48278E84-9280-48E1-B62D-959C7EAFBCD2</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
@@ -520,7 +617,7 @@
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>08B50D41-CDA9-4549-9BE4-391F2F398D8A</string>
+			<string>833965A8-50B4-45A9-B98F-64FFE6B40E72</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -528,7 +625,7 @@
 			<key>config</key>
 			<dict>
 				<key>argument</key>
-				<string></string>
+				<string>00:00:00,{var:DURATION},{var:FADEIN},{var:FADEOUT}</string>
 				<key>passthroughargument</key>
 				<false/>
 				<key>variables</key>
@@ -547,63 +644,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>./exe remove "$1"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>6F5CB455-2F0E-4069-B0ED-7E6387CA5FAE</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>externaltriggerid</key>
-				<string>yl</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
-			<key>uid</key>
-			<string>F252ADEA-5571-45A2-8321-A68A3565C51A</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>yl</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>DCE686B0-C372-41A1-AC2E-4B0B3757BEC8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -617,7 +657,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>yl</string>
+				<string>{var:KEYWORD_LIST}</string>
 				<key>queuedelaycustom</key>
 				<integer>1</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -629,7 +669,7 @@
 				<key>runningsubtext</key>
 				<string>loading...</string>
 				<key>script</key>
-				<string>./exe yl "$1"</string>
+				<string>./exe list -- "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -653,6 +693,8 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>jumpto</key>
+				<string>_popUpItemAction:</string>
 				<key>path</key>
 				<string></string>
 				<key>type</key>
@@ -665,6 +707,21 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>list</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>DCE686B0-C372-41A1-AC2E-4B0B3757BEC8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -673,118 +730,220 @@
 		<key>03BCD0DF-C2C2-4D7C-8881-AB5F12B61277</key>
 		<dict>
 			<key>xpos</key>
-			<real>875</real>
+			<real>605</real>
 			<key>ypos</key>
-			<real>270</real>
-		</dict>
-		<key>08B50D41-CDA9-4549-9BE4-391F2F398D8A</key>
-		<dict>
-			<key>xpos</key>
-			<real>675</real>
-			<key>ypos</key>
-			<real>305</real>
+			<real>585</real>
 		</dict>
 		<key>349B90A8-36CF-42B7-83FF-6F6FF6E10786</key>
 		<dict>
 			<key>xpos</key>
 			<real>315</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>50</real>
 		</dict>
 		<key>3EA52F77-CF6A-4F12-BCAC-024B03C90FCF</key>
 		<dict>
 			<key>xpos</key>
-			<real>415</real>
+			<real>475</real>
 			<key>ypos</key>
-			<real>330</real>
+			<real>615</real>
 		</dict>
-		<key>4DE1E041-ECE8-43DE-8979-03806E84777E</key>
+		<key>469D80C9-6508-480E-8992-DF530C8CA046</key>
 		<dict>
 			<key>xpos</key>
-			<real>790</real>
+			<real>30</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>290</real>
 		</dict>
 		<key>5C0BDE92-B2B0-43CC-89B6-20A0C1AEA13B</key>
 		<dict>
 			<key>xpos</key>
-			<real>240</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>425</real>
 		</dict>
 		<key>61338289-2042-4FE8-BB39-594CC313C789</key>
 		<dict>
 			<key>xpos</key>
-			<real>1115</real>
+			<real>1075</real>
 			<key>ypos</key>
-			<real>270</real>
+			<real>425</real>
 		</dict>
 		<key>6F5CB455-2F0E-4069-B0ED-7E6387CA5FAE</key>
 		<dict>
+			<key>note</key>
+			<string>remove item</string>
 			<key>xpos</key>
-			<real>875</real>
+			<real>1075</real>
 			<key>ypos</key>
-			<real>380</real>
+			<real>585</real>
 		</dict>
 		<key>701DDABB-0FD5-46B8-9E87-FF65B7762F75</key>
 		<dict>
 			<key>xpos</key>
-			<real>240</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>490</real>
+			<real>755</real>
+		</dict>
+		<key>7F3D03A2-D286-4A49-8A2E-774324A67691</key>
+		<dict>
+			<key>xpos</key>
+			<real>1305</real>
+			<key>ypos</key>
+			<real>425</real>
+		</dict>
+		<key>833965A8-50B4-45A9-B98F-64FFE6B40E72</key>
+		<dict>
+			<key>xpos</key>
+			<real>815</real>
+			<key>ypos</key>
+			<real>590</real>
+		</dict>
+		<key>8909A4F3-EBBA-4C3F-A855-177DEC0763FD</key>
+		<dict>
+			<key>xpos</key>
+			<real>475</real>
+			<key>ypos</key>
+			<real>320</real>
 		</dict>
 		<key>B8D40F56-8F6B-413A-9C05-6550F4E6D2FE</key>
 		<dict>
 			<key>xpos</key>
 			<real>180</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>80</real>
 		</dict>
 		<key>C14EE479-8A76-4654-82AE-E5CB93857AC5</key>
 		<dict>
 			<key>xpos</key>
-			<real>875</real>
+			<real>1075</real>
 			<key>ypos</key>
-			<real>490</real>
+			<real>755</real>
 		</dict>
 		<key>C5D01C04-489D-4334-B3EF-241ACA937B37</key>
 		<dict>
 			<key>xpos</key>
-			<real>485</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>300</real>
+			<real>585</real>
 		</dict>
 		<key>D444A531-2963-4383-80F4-FF0F5D83F476</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>15</real>
+			<real>50</real>
 		</dict>
 		<key>DCE686B0-C372-41A1-AC2E-4B0B3757BEC8</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>490</real>
+			<real>755</real>
 		</dict>
 		<key>DE6C57FC-05DE-43C9-B80C-2CD77EE2541B</key>
 		<dict>
 			<key>xpos</key>
 			<real>240</real>
 			<key>ypos</key>
-			<real>45</real>
+			<real>80</real>
 		</dict>
 		<key>F252ADEA-5571-45A2-8321-A68A3565C51A</key>
 		<dict>
 			<key>xpos</key>
-			<real>1115</real>
+			<real>1305</real>
 			<key>ypos</key>
-			<real>380</real>
+			<real>585</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/Desktop/video2ringtone</string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>ringtone destination</string>
+			<key>label</key>
+			<string>Output folder</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>variable</key>
+			<string>OUTPUT</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>www.youtube.com/watch
+youtu.be/watch
+www.bilibili.com/video</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+				<key>verticalsize</key>
+				<integer>3</integer>
+			</dict>
+			<key>description</key>
+			<string>Supported sites (regex express)</string>
+			<key>label</key>
+			<string>Support Sites</string>
+			<key>type</key>
+			<string>textarea</string>
+			<key>variable</key>
+			<string>SUPPORT_SITES</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>vl</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>List all m4a ringtones from output folder</string>
+			<key>label</key>
+			<string>Keyword List</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>KEYWORD_LIST</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>vd</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Detect URL from browser or clipboard</string>
+			<key>label</key>
+			<string>Keyword Detect</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>KEYWOARD_DETECT</string>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -848,12 +1007,26 @@
 			<key>variable</key>
 			<string>FADEOUT</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+			</dict>
+			<key>description</key>
+			<string>Show debug log</string>
+			<key>label</key>
+			<string>Debug</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>DEBUG</string>
+		</dict>
 	</array>
-	<key>variables</key>
-	<dict>
-		<key>DEBUG</key>
-		<string>true</string>
-	</dict>
 	<key>version</key>
 	<string>0.1.0</string>
 	<key>webaddress</key>
