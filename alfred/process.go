@@ -1,9 +1,12 @@
 package alfred
 
 import (
+	"encoding/json"
 	"fmt"
 
 	aw "github.com/deanishe/awgo"
+
+	"github.com/cage1016/alfred-video2ringtone/fs"
 )
 
 const ongoingProcess = "process.json"
@@ -16,23 +19,32 @@ type Process struct {
 }
 
 func LoadOngoingProcess(wf *aw.Workflow) (Process, error) {
-	// fallback load function doing nothing
-	nop := func() (interface{}, error) {
-		return 0.0, nil
+	df := fs.NewDefaultFs(GetOutput(wf))
+	content, err := df.ReadFile(ongoingProcess)
+	if err != nil {
+		return Process{}, fmt.Errorf("error reading the ongoing ringTone: %w", err)
 	}
 
-	var prop Process
-	if err := wf.Data.LoadOrStoreJSON(ongoingProcess, 0, nop, &prop); err != nil {
-		return Process{}, fmt.Errorf("error loading the ongoing process: %w", err)
+	var data Process
+	err = json.Unmarshal([]byte(content), &data)
+	if err != nil {
+		return Process{}, fmt.Errorf("error unmarshalling the ongoing ringTone: %w", err)
 	}
 
-	return prop, nil
+	return data, nil
 }
 
 func StoreOngoingProcess(wf *aw.Workflow, prop Process) error {
-	if err := wf.Data.StoreJSON(ongoingProcess, prop); err != nil {
-		return fmt.Errorf("error storing the ongoing process: %w", err)
+	df := fs.NewDefaultFs(GetOutput(wf))
+
+	data, err := json.MarshalIndent(prop, "", "  ")
+	if err != nil {
+		return fmt.Errorf("marshal JSON: %w", err)
 	}
 
+	err = df.WriteFile(ongoingProcess, string(data), true)
+	if err != nil {
+		return fmt.Errorf("error writing the ongoing ringTone: %w", err)
+	}
 	return nil
 }
