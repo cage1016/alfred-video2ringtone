@@ -7,6 +7,7 @@ import (
 	"errors"
 	"os"
 	"path/filepath"
+	"strings"
 
 	aw "github.com/deanishe/awgo"
 	"github.com/deanishe/awgo/update"
@@ -14,12 +15,11 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/cage1016/alfred-video2ringtone/alfred"
+	"github.com/cage1016/alfred-video2ringtone/lib"
 )
 
-const updateJobName = "checkForUpdate"
-
 var (
-	repo = "cage1016/alfred-yt-ringtone"
+	repo = "cage1016/alfred-video2ringtone"
 	wf   *aw.Workflow
 	av   = aw.NewArgVars()
 )
@@ -44,11 +44,11 @@ var rootCmd = &cobra.Command{
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	wf.Run(func() {
-		if _, err := os.Stat(filepath.Join(wf.DataDir(), "process.json")); errors.Is(err, os.ErrNotExist) {
+		if _, err := os.Stat(filepath.Join(alfred.GetOutput(wf), "process.json")); errors.Is(err, os.ErrNotExist) {
 			alfred.StoreOngoingProcess(wf, alfred.Process{})
 		}
 
-		if _, err := os.Stat(filepath.Join(wf.DataDir(), "ringtone.json")); errors.Is(err, os.ErrNotExist) {
+		if _, err := os.Stat(filepath.Join(alfred.GetOutput(wf), "ringtone.json")); errors.Is(err, os.ErrNotExist) {
 			alfred.StoreOngoingRingTone(wf, alfred.RingTone{})
 		}
 
@@ -61,6 +61,14 @@ func Execute() {
 func init() {
 	wf = aw.New(update.GitHub(repo), aw.HelpURL(repo+"/issues"))
 	wf.Args() // magic for "workflow:update"
+
+	// Create default destination directory if not exist and create
+	if _, err := os.Stat(alfred.GetOutput(wf)); errors.Is(err, os.ErrNotExist) {
+		os.Mkdir(alfred.GetOutput(wf), 0755)
+	}
+
+	// setup video sites regex
+	lib.SetupVideoSitesRegex(strings.Split(alfred.GetSupportSites(wf), "\n")...)
 
 	if alfred.GetDebug(wf) {
 		logrus.SetLevel(logrus.DebugLevel)

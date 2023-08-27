@@ -5,25 +5,16 @@ package cmd
 
 import (
 	"fmt"
-	"regexp"
+	"path/filepath"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/spf13/cobra"
 
 	"github.com/cage1016/alfred-video2ringtone/alfred"
+	"github.com/cage1016/alfred-video2ringtone/lib"
 )
-
-var rangeRegex = regexp.MustCompile(`(?m)^[0-2][0-3]:[0-5][0-9]:[0-5][0-9](?:,(40|[0-3][0-9]|[12][0-9]|[1-9]))?(?:,(40|[0-3][0-9]|[12][0-9]|[1-9])){0,2}$`)
-var ytURLRegex = regexp.MustCompile(`(?m)^(https?\:\/\/)?(www\.youtube\.com|youtu\.be)\/.+$`)
-
-func IsRangeValid(s string) bool {
-	return rangeRegex.MatchString(s)
-}
-
-func IsYoutubeURLValid(s string) bool {
-	return ytURLRegex.MatchString(s)
-}
 
 // parseCmd represents the parse command
 var parseCmd = &cobra.Command{
@@ -66,7 +57,7 @@ func runParseCmd(cmd *cobra.Command, args []string) {
 		title = buf[0]
 	}
 
-	if !IsYoutubeURLValid(url) {
+	if !lib.IsVideoURLValid(url) {
 		wf.NewItem(fmt.Sprintf("\"%s\" is invalid Youtube URL", url)).
 			Subtitle("Try another query?").
 			Icon(DefaultDisabledIcon).
@@ -76,7 +67,7 @@ func runParseCmd(cmd *cobra.Command, args []string) {
 	}
 
 	help := alfred.GetHelp(wf)
-	if len(args) == 0 || !IsRangeValid(args[0]) {
+	if len(args) == 0 || !lib.IsRangeValid(args[0]) {
 		wf.NewItem(title).
 			Subtitle("⌘+L for help. e.g. \"HH:MM:SS | HH:MM:SS,duration | HH:MM:SS,duration,FadeIn&Out | HH:MM:SS,duration,FadeIn,FadeOut\"").
 			Quicklook(url).
@@ -120,7 +111,29 @@ func runParseCmd(cmd *cobra.Command, args []string) {
 				Arg(fmt.Sprintf("%s,%s,%s,%s", ss, t, fin, fout)).
 				Quicklook(url).
 				Largetype(help).
-				Valid(true)
+				Valid(true).
+				Var("action", "convert")
+		}
+
+		// load exist ringtone
+		ringtone, _ := alfred.LoadOngoingRingTone(wf)
+		if rt, ok := ringtone.Items[url]; ok {
+			p := filepath.Join(alfred.GetOutput(wf), rt.Name)
+			t := time.Unix(rt.CreatedAt, 0).Local().Format("2006-01-02 15:04:05")
+			wi := wf.NewItem(rt.Name).
+				Subtitle(fmt.Sprintf("⌥ ,↩ Action in Alfred %s. %s", t, rt.Info)).
+				Valid(true).
+				Quicklook(p).
+				Largetype(fmt.Sprintf("Created At %s \n\n%s", t, rt.Info)).
+				Icon(RingToneIcon).
+				Arg(p).
+				Var("action", "alfred-action")
+
+			wi.Opt().
+				Subtitle("↩ Remove Item").
+				Valid(true).
+				Arg(url).
+				Var("action", "remove")
 		}
 	}
 

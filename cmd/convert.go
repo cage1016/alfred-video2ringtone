@@ -10,15 +10,17 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"time"
 
-	"github.com/cage1016/alfred-video2ringtone/alfred"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
-)
+	"github.com/wellmoon/m4aTag/mtag"
 
-const p = `tell application id "com.runningwithcrayons.Alfred" to run trigger "notifier" in workflow "com.kaichu.yt2ringtone" with argument "%s"`
+	"github.com/cage1016/alfred-video2ringtone/alfred"
+	"github.com/cage1016/alfred-video2ringtone/lib"
+)
 
 func lastItem(ss []string) string {
 	return ss[len(ss)-1]
@@ -26,10 +28,6 @@ func lastItem(ss []string) string {
 
 func fileNameWithoutExtTrimSuffix(fileName string) string {
 	return strings.TrimSuffix(fileName, filepath.Ext(fileName))
-}
-
-func notifier(title, msg string) {
-	exec.Command("osascript", "-e", fmt.Sprintf(p, strings.Join([]string{title, msg}, ","))).Run()
 }
 
 func worker(done chan struct{}, r io.ReadCloser, fn func(string)) {
@@ -61,7 +59,7 @@ func runConvertCmd(ccmd *cobra.Command, args []string) {
 	}
 
 	// start notifier
-	notifier("YouTube 2 Ringtone", "Start convert "+title)
+	lib.Notifier("Start convert " + title)
 	alfred.StoreOngoingProcess(wf, alfred.Process{
 		Step:    "preparing",
 		Process: "Preparing",
@@ -71,36 +69,76 @@ func runConvertCmd(ccmd *cobra.Command, args []string) {
 
 	buf = strings.Split(args[0], ",")
 	ss, t, fin, fout := buf[0], buf[1], buf[2], buf[3]
-	var targetName string
+	var targetName, cover string
 	{
-		flags := []string{
-			url,
-			"--external-downloader", "ffmpeg",
-			"--external-downloader-args", fmt.Sprintf("ffmpeg_i:-ss %s -t %s", ss, t),
-			"-x", "--audio-format", "m4a",
-			"--yes-overwrites",
-			"--ignore-errors",
-			"--output", filepath.Join(wf.DataDir(), "%(title)s_tmp.%(ext)s"),
-		}
 
-		// get file name
+		// download cover and get filename
 		{
-			cmd := exec.Command("yt-dlp", append([]string{"--get-filename"}, flags...)...)
-			logrus.Debugf("yt-dlp get-filename: %s", cmd)
-			out, _ := cmd.CombinedOutput()
-			logrus.Debugf("yt-dlp get-filename output: %s", out)
-			if strings.HasPrefix(string(out), "ERROR") {
-				notifier("YouTube 2 Ringtone", string(out))
-				alfred.StoreOngoingProcess(wf, alfred.Process{}) // reset process.json
-				logrus.Fatalf("yt-dlp error: %s", string(out))
+			// cmd := exec.Command("yt-dlp", append([]string{"--get-filename"}, flags...)...)
+			// logrus.Debugf("yt-dlp get-filename: %s", cmd)
+			// out, _ := cmd.CombinedOutput()
+			// logrus.Debugf("yt-dlp get-filename output: %s", out)
+			// if strings.HasPrefix(string(out), "ERROR") {
+			// 	lib.Notifier(string(out))
+			// 	alfred.StoreOngoingProcess(wf, alfred.Process{}) // reset process.json
+			// 	logrus.Fatalf("yt-dlp error: %s", string(out))
+			// }
+			// cover = strings.Split(string(out), "\n")[0]
+			// targetName = fileNameWithoutExtTrimSuffix(filepath.Base(cover))
+
+			flags := []string{
+				"--skip-download", "--write-thumbnail",
+				"-o", filepath.Join(alfred.GetOutput(wf), "%(title)s.%(ext)s"),
+				url,
 			}
-			targetName = fileNameWithoutExtTrimSuffix(filepath.Base(strings.Split(string(out), "\n")[0]))
+			cmd := exec.Command("yt-dlp", flags...)
+			logrus.Debugf("yt-dlp download cover and get filename: %s", cmd)
+
+			r, _ := cmd.StdoutPipe()
+			cmd.Stderr = cmd.Stdout
+
+			done := make(chan struct{})
+			worker(done, r, func(line string) {
+				logrus.Debug(line)
+				data, _ := alfred.LoadOngoingProcess(wf)
+				data.Process = line
+				data.Step = "downloading-cover"
+				alfred.StoreOngoingProcess(wf, data)
+			})
+
+			cmd.Start()
+			<-done
+			cmd.Wait()
+
+			// check if download success
+			data, _ := alfred.LoadOngoingProcess(wf)
+			if strings.HasPrefix(data.Process, "ERROR") {
+				lib.Notifier(data.Process)
+				alfred.StoreOngoingProcess(wf, alfred.Process{}) // reset process.json
+				logrus.Fatalf("yt-dlp error: %s", data.Process)
+			}
+
+			var re = regexp.MustCompile(`(?m)(/[^"]+\.*)`)
+			x := re.FindAllString(data.Process, -1)
+			cover = x[0]
+			targetName = fileNameWithoutExtTrimSuffix(filepath.Base(cover))
 		}
 
 		// download
 		{
+			flags := []string{
+				url,
+				"--external-downloader", "ffmpeg",
+				"--external-downloader-args", fmt.Sprintf("ffmpeg_i:-ss %s -t %s", ss, t),
+				"-x", "--audio-format", "m4a",
+				"--yes-overwrites",
+				"--ignore-errors",
+				"--output", filepath.Join(alfred.GetOutput(wf), "%(title)s.%(ext)s"),
+			}
+
 			cmd := exec.Command("yt-dlp", append([]string{"--newline", "-f", "bestaudio[ext=m4a]"}, flags...)...)
 			logrus.Debugf("yt-dlp download: %s", cmd)
+
 			r, _ := cmd.StdoutPipe()
 			cmd.Stderr = cmd.Stdout
 
@@ -120,21 +158,21 @@ func runConvertCmd(ccmd *cobra.Command, args []string) {
 			// check if download success
 			data, _ := alfred.LoadOngoingProcess(wf)
 			if strings.HasPrefix(data.Process, "ERROR") {
-				notifier("YouTube 2 Ringtone", data.Process)
+				lib.Notifier(data.Process)
 				alfred.StoreOngoingProcess(wf, alfred.Process{}) // reset process.json
 				logrus.Fatalf("yt-dlp error: %s", data.Process)
 			}
 		}
 	}
 
-	DestName := strings.TrimSuffix(targetName, "_tmp")
+	// DestName := strings.TrimSuffix(targetName, "_tmp")
 	{
 		// ffmpeg apply fadeIn fadeOut
 		flags := []string{
 			"-y",
-			"-i", filepath.Join(wf.DataDir(), targetName+".m4a"),
+			"-i", filepath.Join(alfred.GetOutput(wf), targetName+".m4a"),
 			"-filter_complex", fmt.Sprintf("afade=d=%s, areverse, afade=d=%s, areverse", fin, fout),
-			filepath.Join(wf.DataDir(), DestName+".m4a"),
+			filepath.Join(alfred.GetOutput(wf), targetName+".m4a"),
 		}
 		cmd := exec.Command("ffmpeg", flags...)
 		logrus.Debugf("ffmpeg apply fadeIn fadeOut cmd: %s", cmd)
@@ -157,24 +195,51 @@ func runConvertCmd(ccmd *cobra.Command, args []string) {
 		cmd.Wait()
 	}
 
+	// add tag
+	{
+		if strings.HasSuffix(cover, ".webp") {
+			output := filepath.Join(alfred.GetOutput(wf), targetName+".jpg")
+			cmd := exec.Command("ffmpeg", "-i", cover, output)
+			err := cmd.Run()
+			if err != nil {
+				logrus.Errorf("ffmpeg convert webp to jpg error: %s", err)
+			}
+			os.Remove(cover)
+			cover = output
+		}
+
+		err := mtag.UpdateM4aTag(true,
+			filepath.Join(alfred.GetOutput(wf), targetName+".m4a"),
+			targetName,
+			"",
+			"",
+			url,
+			cover,
+		)
+		if err != nil {
+			logrus.Errorf("update m4a tag error: %s", err)
+		}
+	}
+
 	// reset
 	alfred.StoreOngoingProcess(wf, alfred.Process{})
 	data, _ := alfred.LoadOngoingRingTone(wf)
-	if data.Item == nil {
-		data.Item = map[string]alfred.M4a{}
+	if data.Items == nil {
+		data.Items = map[string]alfred.M4a{}
 	}
-	data.Item[url] = alfred.M4a{
-		Name:      DestName + ".m4a",
+	data.Items[url] = alfred.M4a{
+		Title:     title,
+		Name:      targetName + ".m4a",
 		Info:      fmt.Sprintf("Start %s with %ss duration, %ss fadeIn, %ss fadeOut", ss, t, fin, fout),
 		CreatedAt: time.Now().Unix(),
 	}
 	alfred.StoreOngoingRingTone(wf, data)
 
-	// remove temporary file
-	os.Remove(filepath.Join(wf.DataDir(), targetName+".m4a"))
+	// remove temporary cover file
+	os.Remove(cover)
 
-	// start notifier
-	notifier("YouTube 2 Ringtone", DestName+".m4a is ready")
+	// start Notifier
+	lib.Notifier(targetName + ".m4a is ready")
 }
 
 func init() {
