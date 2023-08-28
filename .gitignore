@@ -90,3 +90,4 @@ testenv
 coverage.txt
 .workflow/prefs.plist
 test
+*.alfredworkflow
