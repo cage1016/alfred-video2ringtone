@@ -11,10 +11,12 @@ Alfred workflow to convert video to ringtone
 ## Prerequisites
 
 - Alfred 5
-- [yt-dlp/yt-dlp: A youtube-dl fork with additional features and fixes](https://github.com/yt-dlp/yt-dlp)
+- [yt-dlp/yt-dlp: A youtube-dl fork with additional features and fixes](https://github.com/yt-dlp/yt-dlp) version 2023.07.06
 
 ## Features
 
+- Convert Video to `m4a` ringtone embeded cover art
+- Custom ringtone duration (max 40 seconds), fade in/out duration
 - Universal Action `Convert video 2 ringtone` to convert video to ringtone
 - Detect video from browser and clipboard
   - Browser: Safari, Google Chrome, Chromium, Opera, Vivaldi, Brave Browser, Microsoft Edge
@@ -26,21 +28,49 @@ Visit the [Releases](https://github.com/cage1016/alfred-video2ringtone/releases)
 
 ## Usage
 
-### Convert video 2 ringtone & preview
+### Ringtone concept
 
-![](screenshots/1.png)
-
-![](screenshots/2.png)
+![](screenshots/duration.png)
 
 ## List exist ringtone
+
+- `vl` keyword to list exist ringtone
+- `⇧` to preview
+- `⌥+↩` to remove ringtone
+- `^+↩` to re-convert ringtone again
+- `↩` with `Action in Alfred`
 
 ![](screenshots/3.png)
 
 ### Detect video from browser
 
+- `vd` keyword to detect video from browser or clipboard
+
 ![](screenshots/4.png)
 
 ![](screenshots/5.png)
+
+### Convert video 2 ringtone & preview
+
+```
+HH:MM:SS ex: 00:00:30
+HH:MM:SS,duration ex: 00:00:30,2
+HH:MM:SS,duration,FadeIn&Out  ex: 00:00:30,2,2
+HH:MM:SS,duration,FadeIn,FadeOut ex: 00:00:30,3,2,2
+```
+
+#### URL
+- `⌘+L` for above help
+- `⇧` to preview URL page
+
+#### Ringtone
+- `⇧` to preview ringtone
+- `⌥+↩` to remove ringtone
+- `↩` with `Action in Alfred`
+
+![](screenshots/1.png)
+
+![](screenshots/2.png)
 
 ## Change Log
 

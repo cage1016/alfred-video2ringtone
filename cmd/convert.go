@@ -29,10 +29,6 @@ func lastItem(ss []string) string {
 	return ss[len(ss)-1]
 }
 
-func fileNameWithoutExtTrimSuffix(fileName string) string {
-	return strings.TrimSuffix(fileName, filepath.Ext(fileName))
-}
-
 func worker(done chan struct{}, r io.ReadCloser, fn func(string)) {
 	scanner := bufio.NewScanner(r)
 	go func() {
@@ -112,9 +108,6 @@ func runConvertCmd(ccmd *cobra.Command, args []string) {
 			alfred.StoreOngoingProcess(wf, alfred.Process{}) // reset process.json
 			logrus.Fatalf("yt-dlp error: %s", data.Process)
 		}
-
-		// cover = lastItem(covers)
-		// targetName = fileNameWithoutExtTrimSuffix(filepath.Base(cover))
 	}
 
 	// download m4a

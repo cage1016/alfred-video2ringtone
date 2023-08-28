@@ -111,6 +111,7 @@ func runParseCmd(cmd *cobra.Command, args []string) {
 				Arg(fmt.Sprintf("%s,%s,%s,%s", ss, t, fin, fout)).
 				Quicklook(url).
 				Largetype(help).
+				Icon(VideoLinkIcon).
 				Valid(true).
 				Var("action", "convert")
 		}
