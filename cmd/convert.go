@@ -157,7 +157,7 @@ func runConvertCmd(ccmd *cobra.Command, args []string) {
 	targetName := lastItem(targetNames)
 	cover := lastItem(covers)
 	if strings.HasSuffix(cover, ".webp") {
-		output := strings.TrimSuffix(filepath.Base(cover), ".webp") + ".jpg"
+		output := filepath.Join(alfred.GetOutput(wf), strings.TrimSuffix(filepath.Base(cover), ".webp")+".jpg")
 		cmd := exec.Command("ffmpeg", "-i", cover, output)
 		err := cmd.Run()
 		if err != nil {
@@ -236,7 +236,8 @@ func runConvertCmd(ccmd *cobra.Command, args []string) {
 	}
 
 	// start Notifier
-	lib.Notifier(targetName + "is ready")
+	lib.Notifier(targetName + " is ready")
+	lib.Detect(input)
 }
 
 func init() {

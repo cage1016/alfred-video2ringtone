@@ -5,6 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "trigger",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/main.go",
+            "args": [
+                "convert",
+                "-i",
+                "https://www.youtube.com/watch?v=LG9ahv9unmw\nApril Come She Will - Simon & Garfunkel (Boyce Avenue acoustic cover) on Spotify & Apple",
+                "--",
+                "00:00:00,30,3,3"
+            ]
+        },
+        {
             "name": "convert",
             "type": "go",
             "request": "launch",
@@ -13,7 +27,7 @@
             "args": [
                 "convert",
                 "-i",
-                "https://www.youtube.com/watch?v=br8prOQBVs8\nCalum Scott - At Your Worst (Official Video)",
+                "https://www.bilibili.com/video/BV1Gi4y1K7u1/\n【ROSÉ】《On The Ground》官方MV公开！",
                 "--",
                 "00:00:00,30,3,3"
             ]
