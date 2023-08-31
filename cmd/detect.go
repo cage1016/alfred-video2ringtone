@@ -52,6 +52,7 @@ func runDetectCmd(cmd *cobra.Command, args []string) {
 			wf.NewItem(query).
 				Subtitle("↩ To Convert Video 2 Ringtone").
 				Valid(true).
+				Icon(VideoLinkIcon).
 				Arg(query)
 		}
 	}
@@ -76,6 +77,7 @@ func runDetectCmd(cmd *cobra.Command, args []string) {
 			wf.NewItem(title).
 				Subtitle("↩ To Convert Video 2 Ringtone").
 				Valid(true).
+				Icon(VideoLinkIcon).
 				Arg(strings.Join([]string{url, title}, "\n"))
 		}
 	}
