@@ -21,7 +21,11 @@ Alfred workflow to convert video to ringtone
 - Universal Action `Convert video 2 ringtone` to convert video to ringtone
 - Detect video from browser and clipboard
   - Browser: Safari, Google Chrome, Chromium, Opera, Vivaldi, Brave Browser, Microsoft Edge
-  - Support Sites: Youtube, Bilibili
+- Support Sites `support-site.json` is depend on [yt-dlp/yt-dlp](https://github.com/yt-dlp/yt-dlp) support sites. It's possible to add more sites by yourself. The folloiwing sites are added by default:
+  - Youtube
+  - Bilibili
+  - nicovideo
+  - soundcloud
 
 ## Installation
 
@@ -47,9 +51,11 @@ Visit the [Releases](https://github.com/cage1016/alfred-video2ringtone/releases)
 
 - `vd` keyword to detect video from browser or clipboard
 
-![](screenshots/4.png)
-
 ![](screenshots/5.png)
+
+- `⌥+↩` to launch `support-site.json` 
+
+![](screenshots/4.png)
 
 ### Convert video 2 ringtone & preview
 
@@ -63,6 +69,7 @@ HH:MM:SS,duration,FadeIn,FadeOut ex: 00:00:30,3,2,2
 #### URL
 - `⌘+L` for above help
 - `⇧` to preview URL page
+- `⌥+↩` to Open URL page
 
 #### Ringtone
 - `⇧` to preview ringtone
@@ -72,6 +79,12 @@ HH:MM:SS,duration,FadeIn,FadeOut ex: 00:00:30,3,2,2
 ![](screenshots/1.png)
 
 ![](screenshots/2.png)
+
+### Cancel
+
+Due to workflow leverage `yt-dlp` and `ffmpeg` to download video and convert to `mpa` format ringtone as background process. If you want to cancel the stuck process, just type `vc` keyword.
+
+![](screenshots/cancel.png)
 
 ## Third Party Libraries
 - [wellmoon/m4aTag: add or modify tag for m4a file by golang](https://github.com/wellmoon/m4aTag)
