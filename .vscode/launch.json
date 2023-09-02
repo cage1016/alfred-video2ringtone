@@ -27,7 +27,7 @@
             "args": [
                 "convert",
                 "-i",
-                "https://www.bilibili.com/video/BV1Gi4y1K7u1/\n【ROSÉ】《On The Ground》官方MV公开！",
+                "https://www.nicovideo.jp/watch/sm41209924\n【最速歌ってみた】ユニ / 柊マグネタイト（Covered by ハルリノ）【歌コレ2022春 柊マグネタイト部門より】 - ニコニコ動画",
                 "--",
                 "00:00:00,30,3,3"
             ]

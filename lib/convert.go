@@ -71,6 +71,7 @@ func (c *Convert) DownloadCoverAndGetFilename() error {
 		c.log.Debug(line)
 		data, _ := c.loadOngoingProcess()
 		data.Process = line
+		data.Title = c.title
 		data.Step = "downloading-cover"
 		c.storeOngoingProcess(data)
 
@@ -95,7 +96,7 @@ func (c *Convert) DownloadCoverAndGetFilename() error {
 
 // DownloadM4a implements Converter.
 func (c *Convert) DownloadM4a(ss, t string) error {
-	c.log.Debugf("2. yt-dlp download m4a with ss, t : %s", c.url, ss, t)
+	c.log.Debugf("2. yt-dlp download m4a with ss, t : %s %s %s", c.url, ss, t)
 
 	c.ss = ss
 	c.t = t
@@ -121,6 +122,7 @@ func (c *Convert) DownloadM4a(ss, t string) error {
 		data, _ := c.loadOngoingProcess()
 		data.Process = line
 		data.Step = "downloading"
+		data.Title = c.title
 		c.storeOngoingProcess(data)
 
 		for _, match := range m4aRegex.FindAllString(line, -1) {
@@ -185,6 +187,7 @@ func (c *Convert) ApplyFadeInFadeOut(fin, fout string) error {
 		if strings.HasPrefix(line, "size=") {
 			data, _ := c.loadOngoingProcess()
 			data.Process = strings.TrimSpace(lastItem(strings.Split(line, "\r")))
+			data.Title = c.title
 			data.Step = "trimming"
 			c.storeOngoingProcess(data)
 		}
@@ -223,8 +226,8 @@ func (c *Convert) Reset() string {
 	// reset ongoing process
 	c.storeOngoingProcess(alfred.Process{})
 
-	// update ongoing ringtone
-	{
+	// update ongoing ringtone if targetName is not empty
+	if c.targetName != "" {
 		data, _ := c.loadOngoingRingTone()
 		if data.Items == nil {
 			data.Items = map[string]alfred.M4a{}
