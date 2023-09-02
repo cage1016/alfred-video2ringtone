@@ -5,6 +5,7 @@ package cmd
 
 import (
 	"os/exec"
+	"path/filepath"
 	"strings"
 
 	"github.com/atotto/clipboard"
@@ -43,11 +44,15 @@ func runDetectCmd(cmd *cobra.Command, args []string) {
 	clipboardFn := func() {
 		query, _ := clipboard.ReadAll()
 		if !lib.IsVideoURLValid(query) {
-			wf.NewItem("No Valid Video URL found").
-				Subtitle("Do not found a Valid Video URL in the clipboard").
-				Largetype(alfred.GetSupportSites(wf)).
-				Icon(DefaultDisabledIcon).
+			wi := wf.NewItem("No Valid Video URL found").
+				Subtitle("⌥, Do not found a Valid Video URL in the clipboard").
+				Icon(VideoLinkDisabledIcon).
 				Valid(false)
+
+			wi.Opt().
+				Subtitle("↩ Open Support Site").
+				Arg(filepath.Join(alfred.GetOutput(wf), "support-site.json")).
+				Valid(true)
 		} else {
 			wf.NewItem(query).
 				Subtitle("↩ To Convert Video 2 Ringtone").
