@@ -13,7 +13,7 @@ import (
 
 	"github.com/cage1016/alfred-video2ringtone/alfred"
 	"github.com/cage1016/alfred-video2ringtone/lib"
-	"github.com/cage1016/alfred-video2ringtone/templates"
+	"github.com/cage1016/alfred-video2ringtone/template"
 )
 
 // detectCmd represents the yr command
@@ -57,7 +57,7 @@ func runDetectCmd(cmd *cobra.Command, args []string) {
 		}
 	}
 
-	ccmd := exec.Command("osascript", "-l", "JavaScript", "-e", templates.MustAssetString("tmpl/get_title_and_url.js.tmpl"))
+	ccmd := exec.Command("osascript", "-l", "JavaScript", "-e", template.MustAssetString("tmpl/get_title_and_url.js.tmpl"))
 	out, err := ccmd.CombinedOutput()
 	logrus.Debugf("out: %v", string(out))
 	if err != nil {

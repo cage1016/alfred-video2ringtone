@@ -16,6 +16,7 @@ import (
 
 	"github.com/cage1016/alfred-video2ringtone/alfred"
 	"github.com/cage1016/alfred-video2ringtone/lib"
+	"github.com/cage1016/alfred-video2ringtone/template"
 )
 
 var (
