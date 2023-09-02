@@ -12,6 +12,7 @@ Alfred workflow to convert video to ringtone
 
 - Alfred 5
 - [yt-dlp/yt-dlp: A youtube-dl fork with additional features and fixes](https://github.com/yt-dlp/yt-dlp) version 2023.07.06
+- [FFmpeg/FFmpeg](https://github.com/FFmpeg/FFmpeg)
 
 ## Features
 
