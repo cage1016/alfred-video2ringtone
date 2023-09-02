@@ -136,6 +136,18 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>FB332F2B-1221-46FC-A361-24F7989A420D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>2DBFFDA9-DCBD-4712-9FC8-8EA0AFCFE812</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>C14EE479-8A76-4654-82AE-E5CB93857AC5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -182,6 +194,16 @@
 				<string>3EA52F77-CF6A-4F12-BCAC-024B03C90FCF</string>
 				<key>modifiers</key>
 				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>987D4813-F23E-4FA3-8FF8-F0849445762D</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
@@ -241,21 +263,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>availableviaurlhandler</key>
-				<false/>
-				<key>triggerid</key>
-				<string>notifier</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
-			<key>uid</key>
-			<string>D444A531-2963-4383-80F4-FF0F5D83F476</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -271,6 +278,21 @@
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>349B90A8-36CF-42B7-83FF-6F6FF6E10786</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>notifier</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>D444A531-2963-4383-80F4-FF0F5D83F476</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -320,17 +342,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>availableviaurlhandler</key>
+				<key>concurrently</key>
 				<false/>
-				<key>triggerid</key>
-				<string>detect</string>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>./exe trigger -i "${input}" -- $1</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>469D80C9-6508-480E-8992-DF530C8CA046</string>
+			<string>61338289-2042-4FE8-BB39-594CC313C789</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -361,29 +391,6 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>./exe trigger -i "${input}" -- $1</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>61338289-2042-4FE8-BB39-594CC313C789</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
 				<string>./exe remove "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -398,6 +405,114 @@
 			<string>6F5CB455-2F0E-4069-B0ED-7E6387CA5FAE</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>list</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>uid</key>
+			<string>F252ADEA-5571-45A2-8321-A68A3565C51A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:action}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>convert</string>
+						<key>outputlabel</key>
+						<string>Trigger</string>
+						<key>uid</key>
+						<string>55D6BFA5-8C4A-411E-A5F4-1A3CDB5B1E2B</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:action}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>remove</string>
+						<key>outputlabel</key>
+						<string>Remove Item</string>
+						<key>uid</key>
+						<string>2AD1AF87-8F91-464A-A52C-04A9D83D5885</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:action}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>open-url</string>
+						<key>outputlabel</key>
+						<string>Open URL</string>
+						<key>uid</key>
+						<string>2DBFFDA9-DCBD-4712-9FC8-8EA0AFCFE812</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:action}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>alfred-action</string>
+						<key>outputlabel</key>
+						<string>Action in Alfred</string>
+						<key>uid</key>
+						<string>48278E84-9280-48E1-B62D-959C7EAFBCD2</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>else</string>
+				<key>hideelse</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>833965A8-50B4-45A9-B98F-64FFE6B40E72</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>detect</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>469D80C9-6508-480E-8992-DF530C8CA046</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -449,19 +564,20 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>externaltriggerid</key>
-				<string>list</string>
-				<key>passinputasargument</key>
-				<true/>
-				<key>passvariables</key>
-				<true/>
-				<key>workflowbundleid</key>
-				<string>self</string>
+				<key>argument</key>
+				<string>00:00:00,{var:DURATION},{var:FADEIN},{var:FADEOUT}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>input</key>
+					<string>{query}</string>
+				</dict>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
+			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>F252ADEA-5571-45A2-8321-A68A3565C51A</string>
+			<string>3EA52F77-CF6A-4F12-BCAC-024B03C90FCF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -517,95 +633,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:action}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>convert</string>
-						<key>outputlabel</key>
-						<string>Trigger</string>
-						<key>uid</key>
-						<string>55D6BFA5-8C4A-411E-A5F4-1A3CDB5B1E2B</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:action}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>remove</string>
-						<key>outputlabel</key>
-						<string>Remove Item</string>
-						<key>uid</key>
-						<string>2AD1AF87-8F91-464A-A52C-04A9D83D5885</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:action}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>alfred-action</string>
-						<key>outputlabel</key>
-						<string>Action in Alfred</string>
-						<key>uid</key>
-						<string>48278E84-9280-48E1-B62D-959C7EAFBCD2</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>else</string>
-				<key>hideelse</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>833965A8-50B4-45A9-B98F-64FFE6B40E72</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>00:00:00,{var:DURATION},{var:FADEIN},{var:FADEOUT}</string>
-				<key>passthroughargument</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
-				<key>variables</key>
-				<dict>
-					<key>input</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>3EA52F77-CF6A-4F12-BCAC-024B03C90FCF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>availableviaurlhandler</key>
+				<key>skipvarencode</key>
 				<false/>
-				<key>triggerid</key>
-				<string>list</string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string></string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>DCE686B0-C372-41A1-AC2E-4B0B3757BEC8</string>
+			<string>FB332F2B-1221-46FC-A361-24F7989A420D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -661,6 +703,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>list</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>uid</key>
+			<string>DCE686B0-C372-41A1-AC2E-4B0B3757BEC8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>jumpto</key>
 				<string>_popUpItemAction:</string>
 				<key>path</key>
@@ -672,6 +729,19 @@
 			<string>alfred.workflow.action.actioninalfred</string>
 			<key>uid</key>
 			<string>C14EE479-8A76-4654-82AE-E5CB93857AC5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>path</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.revealfile</string>
+			<key>uid</key>
+			<string>987D4813-F23E-4FA3-8FF8-F0849445762D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -739,28 +809,28 @@
 			<key>xpos</key>
 			<real>605</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>410</real>
 		</dict>
 		<key>10706BAB-B93A-427D-8632-CA6D998F2B23</key>
 		<dict>
 			<key>xpos</key>
 			<real>435</real>
 			<key>ypos</key>
-			<real>880</real>
+			<real>915</real>
 		</dict>
 		<key>349B90A8-36CF-42B7-83FF-6F6FF6E10786</key>
 		<dict>
 			<key>xpos</key>
-			<real>315</real>
+			<real>495</real>
 			<key>ypos</key>
-			<real>50</real>
+			<real>55</real>
 		</dict>
 		<key>3EA52F77-CF6A-4F12-BCAC-024B03C90FCF</key>
 		<dict>
 			<key>xpos</key>
 			<real>475</real>
 			<key>ypos</key>
-			<real>575</real>
+			<real>440</real>
 		</dict>
 		<key>469D80C9-6508-480E-8992-DF530C8CA046</key>
 		<dict>
@@ -769,14 +839,14 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>410</real>
 		</dict>
 		<key>5C0BDE92-B2B0-43CC-89B6-20A0C1AEA13B</key>
 		<dict>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>295</real>
 		</dict>
 		<key>61338289-2042-4FE8-BB39-594CC313C789</key>
 		<dict>
@@ -785,7 +855,7 @@
 			<key>xpos</key>
 			<real>1075</real>
 			<key>ypos</key>
-			<real>385</real>
+			<real>225</real>
 		</dict>
 		<key>6F5CB455-2F0E-4069-B0ED-7E6387CA5FAE</key>
 		<dict>
@@ -794,56 +864,69 @@
 			<key>xpos</key>
 			<real>1075</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>395</real>
 		</dict>
 		<key>701DDABB-0FD5-46B8-9E87-FF65B7762F75</key>
 		<dict>
+			<key>note</key>
+			<string>List ringtons</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>725</real>
 		</dict>
 		<key>833965A8-50B4-45A9-B98F-64FFE6B40E72</key>
 		<dict>
 			<key>xpos</key>
 			<real>815</real>
 			<key>ypos</key>
-			<real>550</real>
+			<real>400</real>
+		</dict>
+		<key>987D4813-F23E-4FA3-8FF8-F0849445762D</key>
+		<dict>
+			<key>xpos</key>
+			<real>1075</real>
+			<key>ypos</key>
+			<real>835</real>
 		</dict>
 		<key>B8D40F56-8F6B-413A-9C05-6550F4E6D2FE</key>
 		<dict>
 			<key>xpos</key>
-			<real>180</real>
+			<real>360</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>85</real>
 		</dict>
 		<key>C14EE479-8A76-4654-82AE-E5CB93857AC5</key>
 		<dict>
 			<key>xpos</key>
 			<real>1075</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>725</real>
 		</dict>
 		<key>C3D1F95A-9CE3-417B-A4FE-A45A2D2F002B</key>
 		<dict>
+			<key>note</key>
+			<string>Cancel Background Job</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>880</real>
+			<real>915</real>
 		</dict>
 		<key>C5D01C04-489D-4334-B3EF-241ACA937B37</key>
 		<dict>
+			<key>note</key>
+			<string>Detect ringtons from browser or clipboard</string>
 			<key>xpos</key>
 			<real>210</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>530</real>
 		</dict>
 		<key>D444A531-2963-4383-80F4-FF0F5D83F476</key>
 		<dict>
 			<key>xpos</key>
-			<real>30</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>50</real>
+			<real>55</real>
 		</dict>
 		<key>DCE686B0-C372-41A1-AC2E-4B0B3757BEC8</key>
 		<dict>
@@ -852,14 +935,14 @@
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>715</real>
+			<real>725</real>
 		</dict>
 		<key>DE6C57FC-05DE-43C9-B80C-2CD77EE2541B</key>
 		<dict>
 			<key>xpos</key>
-			<real>240</real>
+			<real>420</real>
 			<key>ypos</key>
-			<real>80</real>
+			<real>85</real>
 		</dict>
 		<key>F252ADEA-5571-45A2-8321-A68A3565C51A</key>
 		<dict>
@@ -868,7 +951,14 @@
 			<key>xpos</key>
 			<real>1305</real>
 			<key>ypos</key>
-			<real>545</real>
+			<real>395</real>
+		</dict>
+		<key>FB332F2B-1221-46FC-A361-24F7989A420D</key>
+		<dict>
+			<key>xpos</key>
+			<real>1075</real>
+			<key>ypos</key>
+			<real>610</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -893,29 +983,6 @@
 			<string>filepicker</string>
 			<key>variable</key>
 			<string>OUTPUT</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>default</key>
-				<string>www.youtube.com/watch
-youtu.be/watch
-www.bilibili.com/video</string>
-				<key>required</key>
-				<false/>
-				<key>trim</key>
-				<true/>
-				<key>verticalsize</key>
-				<integer>3</integer>
-			</dict>
-			<key>description</key>
-			<string>Supported sites (regex express)</string>
-			<key>label</key>
-			<string>Support Sites</string>
-			<key>type</key>
-			<string>textarea</string>
-			<key>variable</key>
-			<string>SUPPORT_SITES</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -985,19 +1052,32 @@ www.bilibili.com/video</string>
 			<dict>
 				<key>default</key>
 				<string>30</string>
-				<key>placeholder</key>
-				<string>30</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>10</string>
+						<string>10</string>
+					</array>
+					<array>
+						<string>20</string>
+						<string>20</string>
+					</array>
+					<array>
+						<string>30</string>
+						<string>30</string>
+					</array>
+					<array>
+						<string>40</string>
+						<string>40</string>
+					</array>
+				</array>
 			</dict>
 			<key>description</key>
-			<string>Tip: iOS maximum is 30s</string>
+			<string>Tip: iOS maximum is 40s</string>
 			<key>label</key>
 			<string>Duration</string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>popupbutton</string>
 			<key>variable</key>
 			<string>DURATION</string>
 		</dict>
@@ -1006,19 +1086,28 @@ www.bilibili.com/video</string>
 			<dict>
 				<key>default</key>
 				<string>3</string>
-				<key>placeholder</key>
-				<string>3</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>2</string>
+						<string>2</string>
+					</array>
+					<array>
+						<string>3</string>
+						<string>3</string>
+					</array>
+					<array>
+						<string>4</string>
+						<string>4</string>
+					</array>
+				</array>
 			</dict>
 			<key>description</key>
 			<string></string>
 			<key>label</key>
 			<string>Fade In</string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>popupbutton</string>
 			<key>variable</key>
 			<string>FADEIN</string>
 		</dict>
@@ -1027,19 +1116,28 @@ www.bilibili.com/video</string>
 			<dict>
 				<key>default</key>
 				<string>3</string>
-				<key>placeholder</key>
-				<string>3</string>
-				<key>required</key>
-				<true/>
-				<key>trim</key>
-				<true/>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>2</string>
+						<string>2</string>
+					</array>
+					<array>
+						<string>3</string>
+						<string>3</string>
+					</array>
+					<array>
+						<string>4</string>
+						<string>4</string>
+					</array>
+				</array>
 			</dict>
 			<key>description</key>
 			<string></string>
 			<key>label</key>
 			<string>Fade Out</string>
 			<key>type</key>
-			<string>textfield</string>
+			<string>popupbutton</string>
 			<key>variable</key>
 			<string>FADEOUT</string>
 		</dict>
