@@ -801,7 +801,96 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string># alfred-video2ringtone
+
+Alfred workflow to convert video to ringtone
+
+## Prerequisites
+
+- Alfred 5
+- [yt-dlp/yt-dlp: A youtube-dl fork with additional features and fixes](https://github.com/yt-dlp/yt-dlp) version 2023.07.06
+- [FFmpeg/FFmpeg](https://github.com/FFmpeg/FFmpeg)
+
+## Features
+
+- Convert Video to `m4a` ringtone embeded cover art
+- Custom ringtone duration (max 40 seconds), fade in/out duration
+- Universal Action `Convert video 2 ringtone` to convert video to ringtone
+- Detect video from browser and clipboard:
+	- Browser: Safari, Google Chrome, Chromium, Opera, Vivaldi, Brave Browser, Microsoft Edge
+- Support Sites `support-site.json` is depend on [yt-dlp/yt-dlp](https://github.com/yt-dlp/yt-dlp) support sites. It's possible to add more sites by yourself. The folloiwing sites are added by default:
+	- Youtube
+	- Bilibili
+	- nicovideo
+
+## Installation
+
+Visit the [Releases](https://github.com/cage1016/alfred-video2ringtone/releases) to download the latest release.
+
+## Usage
+
+### Ringtone concept
+
+![](duration.png)
+
+## List exist ringtone
+
+- `vl` keyword to list exist ringtone
+- `⇧` to preview
+- `⌥+↩` to remove ringtone
+- `^+↩` to re-convert ringtone again
+- `↩` with `Action in Alfred`
+
+![](3.png)
+
+### Detect video from browser
+
+- `vd` keyword to detect video from browser or clipboard
+
+![](5.png)
+
+- `⌥+↩` to launch `support-site.json` 
+
+![](4.png)
+
+### Convert video 2 ringtone &amp; preview
+
+`
+HH:MM:SS ex: 00:00:30
+HH:MM:SS,duration ex: 00:00:30,2
+HH:MM:SS,duration,FadeIn&amp;Out  ex: 00:00:30,2,2
+HH:MM:SS,duration,FadeIn,FadeOut ex: 00:00:30,3,2,2
+`
+
+#### URL
+- `⌘+L` for above help
+- `⇧` to preview URL page
+- `⌥+↩` to Open URL page
+
+#### Ringtone
+- `⇧` to preview ringtone
+- `⌥+↩` to remove ringtone
+- `↩` with `Action in Alfred`
+
+![](1.png)
+
+![](2.png)
+
+### Cancel
+
+Due to workflow leverage `yt-dlp` and `ffmpeg` to download video and convert to `mpa` format ringtone as background process. If you want to cancel the stuck process, just type `vc` keyword.
+
+![](cancel.png)
+
+## Third Party Libraries
+- [wellmoon/m4aTag: add or modify tag for m4a file by golang](https://github.com/wellmoon/m4aTag)
+
+## Change Log
+
+### 0.1.0
+- Initial release
+
+https://github.com/cage1016/alfred-video2ringtone</string>
 	<key>uidata</key>
 	<dict>
 		<key>03BCD0DF-C2C2-4D7C-8881-AB5F12B61277</key>
