@@ -25,6 +25,8 @@ var detectCmd = &cobra.Command{
 }
 
 func runDetectCmd(cmd *cobra.Command, args []string) {
+	CheckForUpdate()
+
 	// check previous job
 	p, _ := alfred.LoadOngoingProcess(wf)
 	if p.Step != "" {

@@ -22,6 +22,8 @@ var listCmd = &cobra.Command{
 }
 
 func runListCmd(c *cobra.Command, args []string) {
+	CheckForUpdate()
+
 	data, _ := alfred.LoadOngoingRingTone(wf)
 	for url, rt := range data.Items {
 		p := filepath.Join(alfred.GetOutput(wf), rt.Name)

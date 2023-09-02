@@ -14,7 +14,7 @@ import (
 )
 
 var (
-	EnabledAutoUpdate = "false"
+	EnabledAutoUpdate = "true"
 )
 
 const updateJobName = "checkForUpdate"
@@ -29,7 +29,7 @@ func CheckForUpdate() {
 			}
 		}
 
-		if wf.UpdateAvailable() || true {
+		if wf.UpdateAvailable() {
 			wf.Configure(aw.SuppressUIDs(true))
 			wf.NewItem("An update is available!").
 				Subtitle("⇥ or ↩ to install update").
@@ -38,7 +38,7 @@ func CheckForUpdate() {
 				Icon(&aw.Icon{Value: "update-available.png"})
 		}
 	} else {
-		logrus.Info("Auto update disabled")
+		logrus.Debug("Auto update disabled")
 	}
 }
 
@@ -54,7 +54,7 @@ var updateCmd = &cobra.Command{
 				wf.FatalError(err)
 			}
 		} else {
-			logrus.Info("Auto update disabled")
+			logrus.Debug("Auto update disabled")
 		}
 	},
 }
