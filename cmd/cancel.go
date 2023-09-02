@@ -4,6 +4,9 @@ Copyright © 2022 KAI CHU CHUNG <cage.chung@gmail.com>
 package cmd
 
 import (
+	"os"
+	"path/filepath"
+
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
@@ -25,6 +28,11 @@ func runCancelCmd(cmd *cobra.Command, args []string) {
 			logrus.Errorf("Error canceling job: %s", err)
 		}
 		alfred.StoreOngoingProcess(wf, alfred.Process{}) // reset process.json
+
+		// remove tmp files
+		os.RemoveAll(filepath.Join(alfred.GetOutput(wf), "_tmp"))
+
+		// start notifier
 		lib.Notifier("Cancel Background job")
 	}
 }
