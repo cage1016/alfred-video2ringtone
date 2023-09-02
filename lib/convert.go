@@ -110,7 +110,7 @@ func (c *Convert) DownloadM4a(ss, t string) error {
 		"--output", filepath.Join(c.output, "%(title)s.%(ext)s"),
 	}
 
-	cmd := exec.Command("yt-dlp", append([]string{"--newline", "-f", "bestaudio"}, flags...)...)
+	cmd := exec.Command("yt-dlp", append([]string{"--newline"}, flags...)...)
 	c.log.Debugf("yt-dlp download: %s", cmd)
 
 	r, _ := cmd.StdoutPipe()
@@ -170,11 +170,13 @@ func (c *Convert) ApplyFadeInFadeOut(fin, fout string) error {
 	c.fin = fin
 	c.fout = fout
 
+	fadef := strings.TrimSuffix(c.targetName, filepath.Ext(c.targetName)) + "_fade" + filepath.Ext(c.targetName)
+
 	flags := []string{
 		"-y",
 		"-i", c.targetName,
 		"-filter_complex", fmt.Sprintf("afade=d=%s, areverse, afade=d=%s, areverse", fin, fout),
-		c.targetName,
+		fadef,
 	}
 	cmd := exec.Command("ffmpeg", flags...)
 	c.log.Debugf("ffmpeg apply fadeIn fadeOut cmd: %s", cmd)
@@ -196,6 +198,9 @@ func (c *Convert) ApplyFadeInFadeOut(fin, fout string) error {
 	cmd.Start()
 	<-done
 	cmd.Wait()
+
+	// update targetName as fade version
+	c.targetName = fadef
 
 	return nil
 }
@@ -220,7 +225,7 @@ func (c *Convert) AddTag() error {
 }
 
 // Reset implements Converter.
-func (c *Convert) Reset() string {
+func (c *Convert) Reset() (res string) {
 	c.log.Debugf("6. reset ongoing process: %s", c.url)
 
 	// reset ongoing process
@@ -239,16 +244,17 @@ func (c *Convert) Reset() string {
 			CreatedAt: time.Now().Unix(),
 		}
 		c.storeOngoingRingTone(data)
-	}
 
-	// move c.targetName to parent directory
-	newFilePath := filepath.Join(filepath.Dir(c.targetName), "..", filepath.Base(c.targetName))
-	os.Rename(c.targetName, newFilePath)
+		// move c.targetName to parent directory
+		newFilePath := filepath.Join(filepath.Dir(c.targetName), "..", filepath.Base(c.targetName))
+		os.Rename(c.targetName, newFilePath)
+
+		res = newFilePath
+	}
 
 	// delete temporary directory
 	os.RemoveAll(c.output)
-
-	return newFilePath
+	return
 }
 
 // initLogger writes logs to STDOUT and a.paths.DAGDir/wallet.log
