@@ -7,7 +7,6 @@ import (
 	"errors"
 	"os"
 	"path/filepath"
-	"strings"
 
 	aw "github.com/deanishe/awgo"
 	"github.com/deanishe/awgo/update"
@@ -15,6 +14,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/cage1016/alfred-video2ringtone/alfred"
+	"github.com/cage1016/alfred-video2ringtone/fs"
 	"github.com/cage1016/alfred-video2ringtone/lib"
 	"github.com/cage1016/alfred-video2ringtone/template"
 )
@@ -68,8 +68,17 @@ func init() {
 		os.Mkdir(alfred.GetOutput(wf), 0755)
 	}
 
-	// setup video sites regex
-	lib.SetupVideoSitesRegex(strings.Split(alfred.GetSupportSites(wf), "\n")...)
+	// check support sites and create if not exist
+	if _, err := os.Stat(filepath.Join(alfred.GetOutput(wf), "support-site.json")); errors.Is(err, os.ErrNotExist) {
+		fs.NewDefaultFs(alfred.GetOutput(wf)).WriteFile("support-site.json", string(template.MustAsset("tmpl/support_sites.json.tmpl")), true)
+	}
+
+	// load support sites
+	if s, err := fs.NewDefaultFs(alfred.GetOutput(wf)).ReadFile("support-site.json"); err != nil {
+		logrus.Fatalf("failed to read support-site.json: %s", err)
+	} else {
+		lib.LoadSupportSitesRegex(s)
+	}
 
 	if alfred.GetDebug(wf) {
 		logrus.SetLevel(logrus.DebugLevel)

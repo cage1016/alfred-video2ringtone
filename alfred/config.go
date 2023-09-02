@@ -8,12 +8,11 @@ import (
 )
 
 const (
-	Output       = "OUTPUT"
-	SupportSites = "SUPPORT_SITES"
-	Duration     = "DURATION"
-	FadeIn       = "FADEIN"
-	FadeOut      = "FADEOUT"
-	Debug        = "DEBUG"
+	Output   = "OUTPUT"
+	Duration = "DURATION"
+	FadeIn   = "FADEIN"
+	FadeOut  = "FADEOUT"
+	Debug    = "DEBUG"
 )
 
 const helpTpl = `# HH:MM:SS
@@ -77,8 +76,4 @@ func GetHelp(wf *aw.Workflow) string {
 
 func GetOutput(wf *aw.Workflow) string {
 	return wf.Config.Get(Output)
-}
-
-func GetSupportSites(wf *aw.Workflow) string {
-	return wf.Config.Get(SupportSites)
 }
