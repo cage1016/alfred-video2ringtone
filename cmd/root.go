@@ -45,12 +45,32 @@ var rootCmd = &cobra.Command{
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	wf.Run(func() {
+
+		// Create default ongoing process if not exist
 		if _, err := os.Stat(filepath.Join(alfred.GetOutput(wf), "process.json")); errors.Is(err, os.ErrNotExist) {
 			alfred.StoreOngoingProcess(wf, alfred.Process{})
 		}
 
+		// Create default ongoing ringtone if not exist
 		if _, err := os.Stat(filepath.Join(alfred.GetOutput(wf), "ringtone.json")); errors.Is(err, os.ErrNotExist) {
 			alfred.StoreOngoingRingTone(wf, alfred.RingTone{})
+		}
+
+		// Create default destination directory if not exist and create
+		if _, err := os.Stat(alfred.GetOutput(wf)); errors.Is(err, os.ErrNotExist) {
+			os.Mkdir(alfred.GetOutput(wf), 0755)
+		}
+
+		// check support sites and create if not exist
+		if _, err := os.Stat(filepath.Join(alfred.GetOutput(wf), "support-site.json")); errors.Is(err, os.ErrNotExist) {
+			fs.NewDefaultFs(alfred.GetOutput(wf)).WriteFile("support-site.json", string(template.MustAsset("tmpl/support_sites.json.tmpl")), true)
+		}
+
+		// load support sites
+		if s, err := fs.NewDefaultFs(alfred.GetOutput(wf)).ReadFile("support-site.json"); err != nil {
+			logrus.Fatalf("failed to read support-site.json: %s", err)
+		} else {
+			lib.LoadSupportSitesRegex(s)
 		}
 
 		if err := rootCmd.Execute(); err != nil {
@@ -62,23 +82,6 @@ func Execute() {
 func init() {
 	wf = aw.New(update.GitHub(repo), aw.HelpURL(repo+"/issues"))
 	wf.Args() // magic for "workflow:update"
-
-	// Create default destination directory if not exist and create
-	if _, err := os.Stat(alfred.GetOutput(wf)); errors.Is(err, os.ErrNotExist) {
-		os.Mkdir(alfred.GetOutput(wf), 0755)
-	}
-
-	// check support sites and create if not exist
-	if _, err := os.Stat(filepath.Join(alfred.GetOutput(wf), "support-site.json")); errors.Is(err, os.ErrNotExist) {
-		fs.NewDefaultFs(alfred.GetOutput(wf)).WriteFile("support-site.json", string(template.MustAsset("tmpl/support_sites.json.tmpl")), true)
-	}
-
-	// load support sites
-	if s, err := fs.NewDefaultFs(alfred.GetOutput(wf)).ReadFile("support-site.json"); err != nil {
-		logrus.Fatalf("failed to read support-site.json: %s", err)
-	} else {
-		lib.LoadSupportSitesRegex(s)
-	}
 
 	if alfred.GetDebug(wf) {
 		logrus.SetLevel(logrus.DebugLevel)
