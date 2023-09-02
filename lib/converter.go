@@ -4,15 +4,7 @@ import (
 	"bufio"
 	"io"
 	"regexp"
-
-	aw "github.com/deanishe/awgo"
 )
-
-type ConvertCfg struct {
-	IsDebug bool
-	Wf      *aw.Workflow
-	Url     string
-}
 
 type Converter interface {
 	DownloadCoverAndGetFilename() error

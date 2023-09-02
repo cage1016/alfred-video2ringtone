@@ -9,17 +9,32 @@ import (
 	"strings"
 	"time"
 
+	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	"github.com/wellmoon/m4aTag/mtag"
 
 	"github.com/cage1016/alfred-video2ringtone/alfred"
 )
 
+type ConvertCfg struct {
+	Output  string
+	IsDebug bool
+
+	Url   string
+	Title string
+
+	LoadOngoingProcess   func() (alfred.Process, error)
+	StoreOngoingProcess  func(prop alfred.Process) error
+	LoadOngoingRingTone  func() (alfred.RingTone, error)
+	StoreOngoingRingTone func(prop alfred.RingTone) error
+}
+
 type Convert struct {
 	isDebug bool           // debug mode
 	log     *logrus.Logger // logger
 	output  string         // output dir
 	url     string         // video url
+	title   string         // video title
 
 	covers      []string
 	targetNames []string
@@ -36,7 +51,7 @@ type Convert struct {
 
 // DownloadCoverAndGetFilename implements Converter.
 func (c *Convert) DownloadCoverAndGetFilename() error {
-	c.log.Debugf("yt-dlp download cover and get filename: %s", c.url)
+	c.log.Debugf("1. yt-dlp download cover and get filename: %s", c.url)
 
 	flags := []string{
 		"--skip-download",
@@ -80,7 +95,7 @@ func (c *Convert) DownloadCoverAndGetFilename() error {
 
 // DownloadM4a implements Converter.
 func (c *Convert) DownloadM4a(ss, t string) error {
-	c.log.Debugf("yt-dlp download m4a with ss, t : %s", c.url, ss, t)
+	c.log.Debugf("2. yt-dlp download m4a with ss, t : %s", c.url, ss, t)
 
 	c.ss = ss
 	c.t = t
@@ -94,7 +109,7 @@ func (c *Convert) DownloadM4a(ss, t string) error {
 		"--output", filepath.Join(c.output, "%(title)s.%(ext)s"),
 	}
 
-	cmd := exec.Command("yt-dlp", append([]string{"--newline", "-f", "bestaudio[ext=m4a]"}, flags...)...)
+	cmd := exec.Command("yt-dlp", append([]string{"--newline", "-f", "bestaudio"}, flags...)...)
 	c.log.Debugf("yt-dlp download: %s", cmd)
 
 	r, _ := cmd.StdoutPipe()
@@ -129,7 +144,7 @@ func (c *Convert) DownloadM4a(ss, t string) error {
 
 // IdentifyTargetNameAndCover() error
 func (c *Convert) IdentifyTargetNameAndCover() error {
-	c.log.Debugf("identify target name and cover: %s", c.url)
+	c.log.Debugf("3. identify target name and cover: %s", c.url)
 
 	c.targetName = lastItem(c.targetNames)
 	c.cover = lastItem(c.covers)
@@ -148,7 +163,7 @@ func (c *Convert) IdentifyTargetNameAndCover() error {
 
 // ApplyFadeInFadeOut implements Converter.
 func (c *Convert) ApplyFadeInFadeOut(fin, fout string) error {
-	c.log.Debugf("ffmpeg apply %s fadeIn %s fadeOut: %s", c.url, fin, fout)
+	c.log.Debugf("4. apply %s fadeIn %s fadeOut: %s", c.url, fin, fout)
 
 	c.fin = fin
 	c.fout = fout
@@ -184,7 +199,7 @@ func (c *Convert) ApplyFadeInFadeOut(fin, fout string) error {
 
 // AddTag implements Converter.
 func (c *Convert) AddTag() error {
-	c.log.Debugf("update m4a tag: %s", c.url)
+	c.log.Debugf("5. update m4a tag: %s", c.url)
 
 	err := mtag.UpdateM4aTag(true,
 		c.targetName,
@@ -203,7 +218,7 @@ func (c *Convert) AddTag() error {
 
 // Reset implements Converter.
 func (c *Convert) Reset() string {
-	c.log.Debugf("reset ongoing process: %s", c.url)
+	c.log.Debugf("6. reset ongoing process: %s", c.url)
 
 	// reset ongoing process
 	c.storeOngoingProcess(alfred.Process{})
@@ -215,7 +230,7 @@ func (c *Convert) Reset() string {
 			data.Items = map[string]alfred.M4a{}
 		}
 		data.Items[c.url] = alfred.M4a{
-			Title:     title,
+			Title:     c.title,
 			Name:      filepath.Base(c.targetName),
 			Info:      fmt.Sprintf("Start %s with %ss duration, %ss fadeIn, %ss fadeOut", c.ss, c.t, c.fin, c.fout),
 			CreatedAt: time.Now().Unix(),
@@ -223,61 +238,74 @@ func (c *Convert) Reset() string {
 		c.storeOngoingRingTone(data)
 	}
 
-	// remove temporary cover file and m4a file
-	for _, cover := range c.covers {
-		os.Remove(cover)
-	}
+	// move c.targetName to parent directory
+	newFilePath := filepath.Join(filepath.Dir(c.targetName), "..", filepath.Base(c.targetName))
+	os.Rename(c.targetName, newFilePath)
 
-	// remove temporary m4a file
-	for _, t := range c.targetNames {
-		if t != c.targetName {
-			os.Remove(t)
-		}
-	}
+	// delete temporary directory
+	os.RemoveAll(c.output)
 
-	return c.targetName
+	return newFilePath
 }
 
 // initLogger writes logs to STDOUT and a.paths.DAGDir/wallet.log
 func (c *Convert) initLogger() {
+	logf := c.output + "/convert.log"
 	if c.isDebug {
 		c.log.SetLevel(logrus.DebugLevel)
-	}
 
-	logFile, err := os.OpenFile(c.output+"/convert.log", os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0664)
-	if err != nil {
-		c.log.Fatalf("open log file failed: %v", err)
+		logFile, err := os.OpenFile(logf, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0664)
+		if err != nil {
+			c.log.Fatalf("open log file failed: %v", err)
+		}
+		mw := io.MultiWriter(os.Stdout, logFile)
+		c.log.SetOutput(mw)
+		c.log.SetFormatter(&logrus.TextFormatter{
+			ForceColors:   true,
+			FullTimestamp: true,
+		})
+	} else {
+		if _, err := os.Stat(logf); err == nil {
+			os.Remove(logf)
+		}
 	}
-	mw := io.MultiWriter(os.Stdout, logFile)
-	c.log.SetOutput(mw)
-	c.log.SetFormatter(&logrus.TextFormatter{
-		ForceColors:   true,
-		FullTimestamp: true,
-	})
 }
 
-func NewConvert(cfg ConvertCfg) Converter {
+// create directories
+func (c *Convert) directoryCreator(directories ...string) error {
+	for _, d := range directories {
+		err := os.MkdirAll(d, os.ModePerm)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewConvert(cfg ConvertCfg) (Converter, error) {
 	srv := &Convert{
-		log:         logrus.New(),
-		output:      alfred.GetOutput(cfg.Wf),
-		isDebug:     cfg.IsDebug,
-		url:         cfg.Url,
-		covers:      []string{},
-		targetNames: []string{},
-		loadOngoingProcess: func() (alfred.Process, error) {
-			return alfred.LoadOngoingProcess(cfg.Wf)
-		},
-		storeOngoingProcess: func(prop alfred.Process) error {
-			return alfred.StoreOngoingProcess(cfg.Wf, prop)
-		},
-		loadOngoingRingTone: func() (alfred.RingTone, error) {
-			return alfred.LoadOngoingRingTone(cfg.Wf)
-		},
-		storeOngoingRingTone: func(prop alfred.RingTone) error {
-			return alfred.StoreOngoingRingTone(cfg.Wf, prop)
-		},
+		log:                  logrus.New(),
+		output:               cfg.Output,
+		isDebug:              cfg.IsDebug,
+		url:                  cfg.Url,
+		title:                cfg.Title,
+		covers:               []string{},
+		targetNames:          []string{},
+		loadOngoingProcess:   cfg.LoadOngoingProcess,
+		storeOngoingProcess:  cfg.StoreOngoingProcess,
+		loadOngoingRingTone:  cfg.LoadOngoingRingTone,
+		storeOngoingRingTone: cfg.StoreOngoingRingTone,
 	}
 
+	// init logger
 	srv.initLogger()
-	return srv
+
+	// wrap output dir
+	srv.output = filepath.Join(srv.output, "_tmp")
+	err := srv.directoryCreator(srv.output)
+	if err != nil {
+		return nil, errors.Wrap(err, "create directory failed")
+	}
+
+	return srv, nil
 }
