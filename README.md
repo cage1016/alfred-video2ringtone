@@ -3,6 +3,7 @@
 Alfred workflow to convert video to ringtone
 
 [![Release](https://github.com/cage1016/alfred-video2ringtone/actions/workflows/release.yml/badge.svg)](https://github.com/cage1016/alfred-video2ringtone/actions/workflows/release.yml)
+[![Release_auto_update](https://github.com/cage1016/alfred-video2ringtone/actions/workflows/release_auto_update.yml/badge.svg)](https://github.com/cage1016/alfred-video2ringtone/actions/workflows/release_auto_update.yml)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 ![GitHub all releases](https://img.shields.io/github/downloads/cage1016/alfred-video2ringtone/total)
 [![codecov](https://codecov.io/gh/cage1016/alfred-video2ringtone/branch/master/graph/badge.svg)](https://codecov.io/gh/cage1016/alfred-video2ringtone)

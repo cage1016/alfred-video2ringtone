@@ -805,6 +805,8 @@
 
 Alfred workflow to convert video to ringtone
 
+![](2.png)
+
 ## Prerequisites
 
 - Alfred 5
@@ -822,6 +824,7 @@ Alfred workflow to convert video to ringtone
 	- Youtube
 	- Bilibili
 	- nicovideo
+	- soundcloud
 
 ## Installation
 
@@ -873,8 +876,6 @@ HH:MM:SS,duration,FadeIn,FadeOut ex: 00:00:30,3,2,2
 - `↩` with `Action in Alfred`
 
 ![](1.png)
-
-![](2.png)
 
 ### Cancel
 
@@ -1162,7 +1163,7 @@ https://github.com/cage1016/alfred-video2ringtone</string>
 				</array>
 			</dict>
 			<key>description</key>
-			<string>Tip: iOS maximum is 40s</string>
+			<string>Tip: iOS maximum is 30s</string>
 			<key>label</key>
 			<string>Duration</string>
 			<key>type</key>
@@ -1241,7 +1242,7 @@ https://github.com/cage1016/alfred-video2ringtone</string>
 				<string></string>
 			</dict>
 			<key>description</key>
-			<string>Show debug log</string>
+			<string>Show debug convert.log file</string>
 			<key>label</key>
 			<string>Debug</string>
 			<key>type</key>
@@ -1251,7 +1252,7 @@ https://github.com/cage1016/alfred-video2ringtone</string>
 		</dict>
 	</array>
 	<key>version</key>
-	<string>0.1.0</string>
+	<string>0.1.0-rc.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/cage1016/alfred-video2ringtone</string>
 </dict>
