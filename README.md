@@ -72,6 +72,9 @@ HH:MM:SS,duration,FadeIn,FadeOut ex: 00:00:30,3,2,2
 
 ![](screenshots/2.png)
 
+## Third Party Libraries
+- [wellmoon/m4aTag: add or modify tag for m4a file by golang](https://github.com/wellmoon/m4aTag)
+
 ## Change Log
 
 ### 0.1.0
