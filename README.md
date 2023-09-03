@@ -92,7 +92,7 @@ Due to workflow leverage `yt-dlp` and `ffmpeg` to download video and convert to 
 
 ## Change Log
 
-### 0.1.0
+### 0.1.0-rc.1
 - Initial release
 
 ## License
